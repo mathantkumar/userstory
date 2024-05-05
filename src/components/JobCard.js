@@ -1,4 +1,3 @@
-import "@fontsource/lexend";
 import React from "react";
 import { Grid } from "@material-ui/core";
 import { Avatar } from "antd";
@@ -22,8 +21,31 @@ const JobCard = ({ job }) => {
 
   return (
     <Grid item xs={12} sm={12} md={3} style={{ marginLeft: "80px" }}>
-      <Card>
-        <Grid container direction="row" spacing={1}>
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+        `}
+      </style>
+      <Card style={{ borderRadius: "20px" }}>
+        <Text
+          style={{
+            width: "100%",
+            border: "1px solid gray",
+            borderRadius: "15px",
+            borderColor: "black",
+            marginBottom: "15px",
+            padding: "5px",
+            fontSize: "10px",
+          }}
+        >
+          ⏳ Posted 6 days ago
+        </Text>
+        <Grid
+          container
+          direction="row"
+          spacing={1}
+          style={{ marginTop: "20px" }}
+        >
           <Grid item>
             <img src={logoUrl} width={50} height={50} />
           </Grid>
@@ -40,7 +62,11 @@ const JobCard = ({ job }) => {
           </Grid>
         </Grid>
         <Grid container direction="column" style={{ fontFamily: "lexend" }}>
-          <Text color="textSecondary" gutterBottom>
+          <Text
+            color="textSecondary"
+            gutterBottom
+            style={{ color: "rgb(77, 89, 106)" }}
+          >
             Estimated Salary: ₹{minJdSalary || 0} - {maxJdSalary} ✅
           </Text>
           <Text variant="body2" component="h3">
@@ -51,9 +77,9 @@ const JobCard = ({ job }) => {
           </Text>
         </Grid>
 
-        <Text color="gray" gutterBottom>
+        <Text color="gray" gutterBottom style={{ marginTop: "10px" }}>
           Minimum Experience <br />
-          <Text>{minExp || 1} years</Text>
+          <Text style={{ marginTop: "10px" }}>{minExp || 1} years</Text>
         </Text>
         <br />
         <Button
@@ -64,7 +90,7 @@ const JobCard = ({ job }) => {
           style={{
             backgroundColor: "rgb(85, 239, 196)",
             color: "black",
-            width: "230px",
+            width: "280px",
             borderRadius: "10px",
             marginBottom: "5px",
             marginTop: "5px",
@@ -79,8 +105,9 @@ const JobCard = ({ job }) => {
             backgroundColor: "rgb(73, 67, 218)",
             color: "white",
             borderRadius: "10px",
-            width: "230px",
-            padding: "30px",
+            width: "280px",
+            padding: "35px",
+            textAlign: "center",
           }}
         >
           <Avatar

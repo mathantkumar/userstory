@@ -33,7 +33,7 @@ const JobList = () => {
   // };
 
   return (
-    <Grid md={9}>
+    <Grid md={12}>
       <Grid item xs={12} md={12}>
         <Filter onFilter={handleFilterChange} />
       </Grid>
