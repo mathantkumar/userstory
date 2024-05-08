@@ -19,13 +19,9 @@ const JobCard = ({ job }) => {
     logoUrl,
   } = job;
 
+  // Display the job info from the api as card
   return (
     <Grid item xs={12} sm={12} md={3} style={{ marginLeft: "80px" }}>
-      <style>
-        {`
-          @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
-        `}
-      </style>
       <Card style={{ borderRadius: "20px" }}>
         <Text
           style={{

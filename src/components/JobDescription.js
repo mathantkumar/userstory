@@ -13,11 +13,12 @@ const JobDescription = ({ text }) => {
   const handleHideModal = () => {
     setShowModal(false);
   };
+  //Job description - limited up to 300 words and upon clicking show more, a modal with detailed description will popup
 
   return (
     <div>
       <Modal
-        title="Basic Modal"
+        title="About Us"
         open={showModal}
         onOk={handleOk}
         onCancel={handleHideModal}

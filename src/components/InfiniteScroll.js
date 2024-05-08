@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function App() {
+function InfiniteScroll() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1); // Track current page
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      // Replace the URL with your API endpoint
       const response = await axios.get(
-        "https://api.weekday.technology/adhoc/getSampleJdJSON"
+        `https://api.weekday.technology/adhoc/getSampleJdJSON?page=${page}`
       );
-      setData((prevData) => [...prevData, ...response.data]); // Append new data to existing data
+      setData((prevData) => [...prevData, ...response.data]);
+      setPage((prevPage) => prevPage + 1); // Increment page after fetching
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -20,9 +21,25 @@ function App() {
     }
   };
 
-  const handleLoadMore = () => {
-    fetchData();
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      fetchData();
+    }
   };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []); // Add and remove event listener on mount and unmount
+
+  useEffect(() => {
+    fetchData(); // Fetch initial data
+  }, []); // Run once on mount
 
   return (
     <div>
@@ -31,11 +48,9 @@ function App() {
           <li key={item.id}>{item.name}</li>
         ))}
       </ul>
-      <button onClick={handleLoadMore} disabled={loading}>
-        {loading ? "Loading..." : "Load More"}
-      </button>
+      {loading && <p>Loading...</p>}
     </div>
   );
 }
 
-export default App;
+export default InfiniteScroll;

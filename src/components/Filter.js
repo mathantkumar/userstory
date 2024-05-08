@@ -16,6 +16,7 @@ const Filter = ({ onFilter }) => {
   const [minBasePay, setMinBasePay] = useState("");
   const [companySize, setCompanySize] = useState("");
 
+  // These are mock set values implemented for options for filter this which later can be move to service.js or with an api call
   const options = Location.map((location) => ({
     label: location,
     value: location,
@@ -82,7 +83,7 @@ const Filter = ({ onFilter }) => {
           placeholder="Experience"
           onChange={(value) => setMinExperience(value)}
           style={{
-            width: 150,
+            width: 120,
           }}
           options={optionsMinExperience}
         />

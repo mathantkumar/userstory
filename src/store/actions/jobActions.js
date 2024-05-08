@@ -17,6 +17,16 @@ export const fetchJobsFailure = (error) => ({
   payload: error,
 });
 
+const setJobs = (jobs) => ({
+  type: "SET_JOBS",
+  payload: jobs,
+});
+
+const setHasMore = (hasMore) => ({
+  type: "SET_HAS_MORE",
+  payload: hasMore,
+});
+
 export const fetchJobs = async (filters, dispatch) => {
   dispatch(fetchJobsRequest());
   try {
@@ -28,13 +38,15 @@ export const fetchJobs = async (filters, dispatch) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          limit: 900,
-          ...filters, // Apply filters
+          limit: 10,
+          ...filters,
         }),
       }
     );
     const data = await response.json();
     dispatch(fetchJobsSuccess(data.jdList, filters.offset));
+    dispatch(setJobs(data.jdList));
+    dispatch(setHasMore(data.jdList.length === 10));
   } catch (error) {
     dispatch(fetchJobsFailure(error.message));
   }
